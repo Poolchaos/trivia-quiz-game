@@ -7,7 +7,6 @@ import QuizPage from '@/components/pages/QuizPage';
 import ResultsPage from '@/components/pages/ResultsPage';
 import LeaderboardPage from '@/components/pages/LeaderboardPage';
 
-// Define the possible pages in the application
 type AppPage = 'home' | 'quiz' | 'results' | 'leaderboard';
 
 export default function Home() {

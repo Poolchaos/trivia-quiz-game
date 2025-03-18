@@ -9,6 +9,8 @@ interface TimerProps {
 export function Timer({ duration, onComplete, className = '' }: TimerProps) {
   const [timeRemaining, setTimeRemaining] = useState(duration);
   const [isRunning, setIsRunning] = useState(true);
+  const [isWarning, setIsWarning] = useState(false);
+  const [isDanger, setIsDanger] = useState(false);
 
   useEffect(() => {
     if (!isRunning || timeRemaining <= 0) return;
@@ -28,18 +30,23 @@ export function Timer({ duration, onComplete, className = '' }: TimerProps) {
     return () => clearInterval(timer);
   }, [isRunning, timeRemaining, onComplete]);
 
-  // Format the time remaining as MM:SS
+  useEffect(() => {
+    setIsWarning(timeRemaining <= duration * 0.5);
+    setIsDanger(timeRemaining <= duration * 0.25);
+  }, [timeRemaining, duration]);
+
   const minutes = Math.floor(timeRemaining / 60);
   const seconds = timeRemaining % 60;
   const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-  // Calculate percentage of time remaining
   const percentage = Math.floor((timeRemaining / duration) * 100);
   
-  // Determine color based on percentage
   let colorClass = 'bg-green-500';
-  if (percentage < 50) colorClass = 'bg-yellow-500';
-  if (percentage < 20) colorClass = 'bg-red-500';
+  if (isWarning) colorClass = 'bg-yellow-500';
+  if (isDanger) colorClass = 'bg-red-500';
+
+  let timerClass = 'text-sm font-medium';
+  if (isDanger) timerClass += ' animate-pulse text-red-600';
+  else if (isWarning) timerClass += ' text-yellow-600';
 
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
@@ -49,7 +56,7 @@ export function Timer({ duration, onComplete, className = '' }: TimerProps) {
           style={{ width: `${percentage}%` }}
         ></div>
       </div>
-      <div className="text-sm font-medium">{formattedTime}</div>
+      <div className={timerClass}>{formattedTime}</div>
     </div>
   );
 }

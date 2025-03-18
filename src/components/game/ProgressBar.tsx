@@ -11,7 +11,7 @@ export function ProgressBar({ current, total, className = '' }: ProgressBarProps
     <div className={`w-full ${className}`}>
       <div className="flex justify-between mb-1 text-sm text-gray-500">
         <span>Question {current} of {total}</span>
-        <span>{percentage}%</span>
+        <span>{percentage}% Complete</span>
       </div>
       <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
         <div
