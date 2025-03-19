@@ -11,14 +11,19 @@
     "seed": "ts-node --project tsconfig.json src/lib/database/seed.ts"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^3.8.0",
+    "bcryptjs": "^3.0.2",
+    "mongodb": "^6.15.0",
     "mongoose": "^8.12.1",
     "next": "15.2.3",
+    "next-auth": "^5.0.0-beta.25",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
